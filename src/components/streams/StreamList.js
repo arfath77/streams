@@ -16,7 +16,7 @@ class StreamList extends React.Component {
                     <Link to={`/streams/edit/${id}`} className="ui button primary">
                         Edit
                     </Link>
-                    <Link to={`/streams/edit/${id}`} className="ui button negative">
+                    <Link to={`/streams/delete/${id}`} className="ui button negative">
                         Delete
                     </Link>
                 </div>
@@ -39,12 +39,11 @@ class StreamList extends React.Component {
                 {this.renderEdtDelButton(stream)}
                 <i className="large middle aligned icon camera" />
                 <div className="content">
-                    {stream.title}
+                    <Link to={`/streams/${stream.id}`} className="header" >{stream.title}</Link>
                     <div className="description">
                         {stream.description}
                     </div>
                 </div>
-                {this.renderCreateButton}
             </div>
         )})
     }
@@ -54,6 +53,7 @@ class StreamList extends React.Component {
             <div>
                 <h2>Streams</h2>
                 <div className="ui celled list" >{this.renderList()}</div>
+                {this.renderCreateButton()}
             </div>
         )
     }

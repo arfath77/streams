@@ -7,6 +7,8 @@ import StreamForm from './StreamForm';
 class StreamEdit extends React.Component {
 
     componentDidMount () {
+        console.log('in component did mount');
+        
         this.props.fetchStream(this.props.match.params.id);
     }
 
@@ -22,7 +24,7 @@ class StreamEdit extends React.Component {
             <div>
                 <h3>Edit a Stream</h3>
                 <StreamForm onSubmit={this.onSubmit}  
-                    initialValues={{title: this.props.Stream.title, description: this.props.stream.description}}/>
+                    initialValues={{title: this.props.stream.title, description: this.props.stream.description}}/>
             </div>
         )
     }

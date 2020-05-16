@@ -12,9 +12,7 @@ import history from '../history';
 export const signIn = (userId) => {
     return {
         type : SIGN_IN,
-        payload: {
-            userId
-        }
+        payload: userId
     }
 }
 
@@ -25,7 +23,7 @@ export const signOut = () => {
 }
 
 export const createStream = (formValues) => async (dispatch, getState) => {
-    const {userId} = getState().auth;
+    const userId = getState().auth.userId;
     const response = await streams.post('/streams', {...formValues, userId});
     dispatch({type: CREATE_STREAM, payload: response.data});
     history.push('/');
@@ -37,10 +35,7 @@ export const fetchStream = (id) => async dispatch => {
 }
 
 export const fetchStreams = () => async dispatch => {
-    console.log('in fetch stre')
-
     const response = await streams.get('/streams');
-    console.log(response);
     dispatch({type: FETCH_STREAMS, payload: response.data});
 }
 
@@ -51,6 +46,7 @@ export const editStream = (id, formValues) => async dispatch => {
 }
 
 export const deleteStream = (id) => async dispatch => {
-     await streams.get(`/streams/${id}`);
+     await streams.delete(`/streams/${id}`);
     dispatch({type: DELETE_STREAM, payload: id });
+    history.push('/');
 }
